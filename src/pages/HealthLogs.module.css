@@ -1,0 +1,269 @@
+.healthLogs {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.summaryHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: var(--space-4);
+}
+
+.sectionTitle {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.viewReport {
+  background: none;
+  border: none;
+  color: var(--color-primary);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.summaryGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.summaryItem {
+  text-align: center;
+  padding: var(--space-3);
+}
+
+.summaryIcon {
+  color: var(--color-primary);
+  margin: 0 auto var(--space-2);
+}
+
+.summaryIconGreen {
+  color: var(--color-success);
+  margin: 0 auto var(--space-2);
+}
+
+.summaryIconOrange {
+  color: var(--color-warning);
+  margin: 0 auto var(--space-2);
+}
+
+.summaryLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-1);
+}
+
+.summaryValue {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.summaryUnit {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.filtersLabel {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--color-text-secondary);
+}
+
+.filters {
+  display: flex;
+  gap: var(--space-2);
+  flex-wrap: wrap;
+}
+
+.filterBtn {
+  padding: var(--space-2) var(--space-3);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-full);
+  background-color: var(--color-bg-white);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+  color: var(--color-text-secondary);
+}
+
+.filterBtn:hover {
+  background-color: var(--color-bg);
+}
+
+.activeFilter {
+  background-color: var(--color-navy);
+  color: var(--color-text-inverse);
+  border-color: var(--color-navy);
+}
+
+.activeFilter:hover {
+  background-color: var(--color-navy-light);
+}
+
+/* Weekly activity */
+.activityHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.activityTitle {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.activityMeta {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.activityChart {
+  display: flex;
+  gap: var(--space-2);
+  justify-content: space-between;
+}
+
+.activityDay {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--space-2);
+  flex: 1;
+}
+
+.activityBar {
+  width: 100%;
+  height: 32px;
+  border-radius: var(--radius-sm);
+}
+
+.activityLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+/* Search & logs */
+.searchRow {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.search {
+  position: relative;
+  flex: 1;
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--color-text-muted);
+}
+
+.searchInput {
+  width: 100%;
+  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-10);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-sm);
+  font-family: var(--font-family);
+}
+
+.searchInput:focus {
+  outline: 2px solid var(--color-primary);
+  outline-offset: -1px;
+}
+
+.logActions {
+  display: flex;
+  gap: var(--space-3);
+}
+
+.entriesHeader {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.entriesLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.logList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.logCard {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.logDot {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background-color: var(--color-primary);
+  flex-shrink: 0;
+  margin-top: var(--space-2);
+}
+
+.logContent {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.logHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.logTitle {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.logDate {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.logValues {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+@media (min-width: 640px) {
+  .summaryGrid {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+@media (min-width: 1024px) {
+  .healthLogs {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .healthLogs > section:first-child {
+    grid-column: 1 / -1;
+  }
+}

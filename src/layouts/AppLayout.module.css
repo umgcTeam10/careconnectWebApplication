@@ -1,0 +1,32 @@
+.layout {
+  display: flex;
+  min-height: 100vh;
+}
+
+.mainColumn {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.content {
+  flex: 1;
+  padding: var(--space-4);
+  padding-bottom: calc(var(--bottom-nav-height) + var(--space-4));
+  max-width: var(--max-content-width);
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Desktop: offset main column for fixed sidebar */
+@media (min-width: 1024px) {
+  .mainColumn {
+    margin-left: var(--sidebar-width);
+  }
+
+  .content {
+    padding: var(--space-8);
+    padding-bottom: var(--space-8);
+  }
+}

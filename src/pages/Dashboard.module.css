@@ -1,0 +1,126 @@
+.dashboard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.pageTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+}
+
+.subtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+
+.statsGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.section {
+  margin-top: var(--space-2);
+}
+
+/* Wellness card */
+.wellnessCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.wellnessContent {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.wellnessIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--radius-full);
+  flex-shrink: 0;
+}
+
+.wellnessTitle {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.wellnessText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-top: var(--space-1);
+}
+
+.wellnessLink {
+  text-decoration: none;
+  align-self: flex-start;
+}
+
+/* Task list */
+.taskList {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.taskCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.taskHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.taskTitle {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.taskTime {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Tablet: stats in row */
+@media (min-width: 640px) {
+  .statsGrid {
+    flex-direction: row;
+  }
+
+  .statsGrid > * {
+    flex: 1;
+  }
+}
+
+/* Desktop: two-column layout */
+@media (min-width: 1024px) {
+  .dashboard {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-6);
+  }
+
+  .dashboard > section:first-child {
+    grid-column: 1 / -1;
+  }
+
+  .statsGrid {
+    flex-direction: row;
+  }
+}
