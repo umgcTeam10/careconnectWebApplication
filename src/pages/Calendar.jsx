@@ -34,11 +34,32 @@ const MONTH_NAMES = [
 ];
 
 export default function Calendar() {
-  const [currentDate] = useState(new Date(2026, 0, 26));
+  const [currentDate, setCurrentDate] = useState(new Date(2026, 0, 26));
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   const selectedDay = currentDate.getDate();
   const days = generateCalendarDays(year, month);
+
+  const goToPrevMonth = () => {
+    setCurrentDate(new Date(year, month - 1, 1));
+  };
+
+  const goToNextMonth = () => {
+    setCurrentDate(new Date(year, month + 1, 1));
+  };
+
+  const selectDay = (day, isCurrentMonth) => {
+    if (isCurrentMonth) {
+      setCurrentDate(new Date(year, month, day));
+    } else if (day > 15) {
+      setCurrentDate(new Date(year, month - 1, day));
+    } else {
+      setCurrentDate(new Date(year, month + 1, day));
+    }
+  };
+
+  const dayOfWeek = currentDate.toLocaleDateString('en-US', { weekday: 'long' });
+  const monthName = MONTH_NAMES[currentDate.getMonth()];
 
   return (
     <div className={styles.calendar}>
@@ -50,13 +71,13 @@ export default function Calendar() {
 
         <Card padding="md" className={styles.calendarCard}>
           <div className={styles.calendarNav}>
-            <button type="button" aria-label="Previous month" className={styles.navBtn}>
+            <button type="button" aria-label="Previous month" className={styles.navBtn} onClick={goToPrevMonth}>
               <Icon name="chevronLeft" size={20} />
             </button>
             <span className={styles.monthYear}>
               {MONTH_NAMES[month]} {year}
             </span>
-            <button type="button" aria-label="Next month" className={styles.navBtn}>
+            <button type="button" aria-label="Next month" className={styles.navBtn} onClick={goToNextMonth}>
               <Icon name="chevronRight" size={20} />
             </button>
           </div>
@@ -85,6 +106,7 @@ export default function Calendar() {
                 aria-current={
                   d.day === selectedDay && d.isCurrentMonth ? 'date' : undefined
                 }
+                onClick={() => selectDay(d.day, d.isCurrentMonth)}
               >
                 {d.day}
               </button>
@@ -95,7 +117,7 @@ export default function Calendar() {
 
       <section aria-labelledby="schedule-heading" className={styles.section}>
         <h2 id="schedule-heading" className={styles.scheduleTitle}>
-          Schedule for Monday, Jan {selectedDay}
+          Schedule for {dayOfWeek}, {monthName} {selectedDay}
         </h2>
 
         <ul className={styles.eventList}>
