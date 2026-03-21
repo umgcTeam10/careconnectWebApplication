@@ -11,8 +11,7 @@
   left: 0;
   bottom: 0;
   width: var(--sidebar-width);
-  background-color: var(--color-bg-white);
-  border-right: 1px solid var(--color-border);
+  background-color: var(--color-navy);
   z-index: 200;
   display: flex;
   flex-direction: column;
@@ -30,7 +29,6 @@
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-5) var(--space-4);
-  border-bottom: 1px solid var(--color-border);
 }
 
 .logo {
@@ -46,10 +44,24 @@
   border-radius: var(--radius-md);
 }
 
+.brandText {
+  display: flex;
+  flex-direction: column;
+}
+
 .brandName {
   font-size: var(--font-size-lg);
   font-weight: var(--font-weight-bold);
-  color: var(--color-text);
+  color: var(--color-text-inverse);
+}
+
+.brandSub {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+}
+
+.nav {
+  flex: 1;
 }
 
 .navList {
@@ -61,27 +73,63 @@
   align-items: center;
   gap: var(--space-3);
   padding: var(--space-3) var(--space-4);
-  color: var(--color-text-secondary);
+  color: rgba(255, 255, 255, 0.7);
   text-decoration: none;
   font-weight: var(--font-weight-medium);
+  font-size: var(--font-size-sm);
   transition: background-color 0.15s ease, color 0.15s ease;
 }
 
 .navItem:hover {
-  background-color: var(--color-bg);
-  color: var(--color-text);
+  background-color: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-inverse);
   text-decoration: none;
 }
 
 .navItem.active {
-  color: var(--color-primary);
-  background-color: var(--color-primary-light);
+  color: var(--color-text-inverse);
+  background-color: rgba(255, 255, 255, 0.15);
 }
 
 .sidebarFooter {
   margin-top: auto;
-  padding: var(--space-4) 0;
-  border-top: 1px solid var(--color-border);
+  padding: var(--space-4);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.userProfile {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.userAvatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-full);
+}
+
+.userInfo {
+  display: flex;
+  flex-direction: column;
+}
+
+.userName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-inverse);
+}
+
+.userRole {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
 }
 
 /* Mobile & tablet: sidebar is a drawer */

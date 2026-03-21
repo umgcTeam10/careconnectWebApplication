@@ -120,6 +120,10 @@ export default function Calendar() {
             </li>
           ))}
         </ul>
+
+        <button type="button" className={styles.addEventBtn}>
+          <Icon name="plus" size={16} /> Add New Event
+        </button>
       </section>
     </div>
   );

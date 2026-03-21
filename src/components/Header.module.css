@@ -33,9 +33,31 @@
   color: var(--color-text);
 }
 
-/* Desktop: hide hamburger when sidebar is visible */
+.headerRight {
+  display: none;
+  align-items: center;
+  gap: var(--space-3);
+  margin-left: auto;
+}
+
+.dateTime {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.userName {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text);
+}
+
+/* Desktop: hide hamburger when sidebar is visible, show right info */
 @media (min-width: 1024px) {
   .menuButton {
     display: none;
+  }
+
+  .headerRight {
+    display: flex;
   }
 }

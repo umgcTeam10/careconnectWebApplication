@@ -1,7 +1,16 @@
 import { NavLink } from 'react-router-dom';
 import styles from './Sidebar.module.css';
 import Icon from './Icon';
-import { navItems } from '../data/mockData';
+import { currentUser } from '../data/mockData';
+
+const sidebarNavItems = [
+  { path: '/dashboard', label: 'Dashboard', icon: 'home' },
+  { path: '/health-logs', label: 'Health Logs', icon: 'heart' },
+  { path: '/messages', label: 'Messages', icon: 'messages' },
+  { path: '/calendar', label: 'Calendar', icon: 'calendar' },
+  { path: '/tasks', label: 'Tasks', icon: 'tasks' },
+  { path: '/profile', label: 'Profile', icon: 'profile' },
+];
 
 export default function Sidebar({ isOpen, onClose }) {
   return (
@@ -19,11 +28,14 @@ export default function Sidebar({ isOpen, onClose }) {
       >
         <div className={styles.brand}>
           <span className={styles.logo}>CC</span>
-          <span className={styles.brandName}>CareConnect</span>
+          <div className={styles.brandText}>
+            <span className={styles.brandName}>CareConnect</span>
+            <span className={styles.brandSub}>Patient Portal</span>
+          </div>
         </div>
-        <nav>
+        <nav className={styles.nav}>
           <ul className={styles.navList}>
-            {navItems.map((item) => (
+            {sidebarNavItems.map((item) => (
               <li key={item.path}>
                 <NavLink
                   to={item.path}
@@ -40,10 +52,15 @@ export default function Sidebar({ isOpen, onClose }) {
           </ul>
         </nav>
         <div className={styles.sidebarFooter}>
-          <NavLink to="/health-logs" className={styles.navItem} onClick={onClose}>
-            <Icon name="activity" size={20} />
-            <span>Health Logs</span>
-          </NavLink>
+          <div className={styles.userProfile}>
+            <div className={styles.userAvatar}>
+              {currentUser.careRecipient.charAt(0)}
+            </div>
+            <div className={styles.userInfo}>
+              <span className={styles.userName}>{currentUser.careRecipient.split(' ')[0]}</span>
+              <span className={styles.userRole}>Patient</span>
+            </div>
+          </div>
         </div>
       </aside>
     </>

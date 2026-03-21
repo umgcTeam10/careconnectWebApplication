@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import styles from './Onboarding.module.css';
 import Button from '../components/Button';
+import Icon from '../components/Icon';
 
 const ROLES = [
   {
@@ -31,6 +32,43 @@ export default function Onboarding() {
 
   return (
     <div className={styles.page}>
+      <div className={styles.brandPanel}>
+        <div className={styles.brandTop}>
+          <div className={styles.brandLogo}>
+            <span className={styles.logoIcon}>CC</span>
+            <div>
+              <div className={styles.brandName}>CareConnect</div>
+              <div className={styles.brandSub}>Patient Portal</div>
+            </div>
+          </div>
+          <h2 className={styles.brandTitle}>Welcome back</h2>
+          <p className={styles.brandDesc}>
+            Sign in to access your appointments, medications, test results, and care team messages. We&rsquo;re here to support you every step of the way.
+          </p>
+        </div>
+        <div className={styles.features}>
+          <div className={styles.featureItem}>
+            <Icon name="lock" size={20} />
+            <div>
+              <strong>Secure &amp; Private</strong>
+              <p>Your health information is protected with bank-level encryption and HIPAA compliance.</p>
+            </div>
+          </div>
+          <div className={styles.featureItem}>
+            <Icon name="clock" size={20} />
+            <div>
+              <strong>24/7 Access</strong>
+              <p>View your health records, upcoming appointments, and messages anytime you need.</p>
+            </div>
+          </div>
+        </div>
+        <div className={styles.supportInfo}>
+          <p className={styles.supportTitle}>Need help signing in?</p>
+          <p><strong>Call Support</strong> - 1-800-CARE-HELP - Available 24/7</p>
+          <p><strong>Help Center</strong> - View sign-in guides and FAQs</p>
+        </div>
+      </div>
+
       <main className={styles.container}>
         <p className={styles.step}>Step 1 of 2</p>
         <h1 className={styles.title}>Choose Your Role</h1>

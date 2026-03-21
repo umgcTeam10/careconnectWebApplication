@@ -2,12 +2,31 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-6);
-  max-width: 600px;
+}
+
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.sectionLabel {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: var(--space-4);
 }
 
 .avatarSection {
   text-align: center;
-  padding: var(--space-6) 0;
+  padding: var(--space-4) 0;
 }
 
 .avatar {
@@ -33,16 +52,43 @@
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   margin-top: var(--space-1);
+  margin-bottom: var(--space-4);
+}
+
+.editBtn {
+  margin: 0 auto;
 }
 
 .infoCard {
-  margin-bottom: var(--space-4);
+  display: flex;
+  flex-direction: column;
 }
 
 .cardTitle {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-semibold);
+  margin-bottom: var(--space-3);
+}
+
+.cardSubtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-muted);
+  margin-top: calc(-1 * var(--space-2));
   margin-bottom: var(--space-4);
+}
+
+.contactRow {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  padding: var(--space-2) 0;
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.contactRow svg {
+  color: var(--color-text-muted);
+  flex-shrink: 0;
 }
 
 .infoList {
@@ -75,8 +121,255 @@
   font-weight: var(--font-weight-medium);
 }
 
-.placeholder {
-  font-size: var(--font-size-sm);
+/* Settings */
+.settingsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: var(--space-3);
+}
+
+.settingsTitle {
+  font-size: var(--font-size-xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.settingsSearch {
+  position: relative;
+}
+
+.searchIcon {
+  position: absolute;
+  left: var(--space-3);
+  top: 50%;
+  transform: translateY(-50%);
   color: var(--color-text-muted);
-  font-style: italic;
+}
+
+.searchInput {
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-8);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family);
+  width: 180px;
+}
+
+/* Toggle switches */
+.toggleGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.toggleItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.toggleLabel {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  cursor: pointer;
+}
+
+.toggleDesc {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-left: 44px;
+}
+
+.toggleSwitch {
+  position: relative;
+  display: inline-block;
+  width: 36px;
+  height: 20px;
+  flex-shrink: 0;
+}
+
+.toggleSwitch input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.slider {
+  position: absolute;
+  inset: 0;
+  background-color: var(--color-border);
+  border-radius: var(--radius-full);
+  transition: background-color 0.2s ease;
+}
+
+.slider::before {
+  content: '';
+  position: absolute;
+  width: 16px;
+  height: 16px;
+  left: 2px;
+  bottom: 2px;
+  background-color: white;
+  border-radius: var(--radius-full);
+  transition: transform 0.2s ease;
+}
+
+.toggleSwitch input:checked + .slider {
+  background-color: var(--color-primary);
+}
+
+.toggleSwitch input:checked + .slider::before {
+  transform: translateX(16px);
+}
+
+.quietHours {
+  margin-top: var(--space-4);
+  padding-top: var(--space-4);
+  border-top: 1px solid var(--color-border);
+}
+
+/* Preferences */
+.prefGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-4);
+}
+
+.prefItem {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.prefLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.formatToggle {
+  display: inline-flex;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  margin-top: var(--space-2);
+}
+
+.formatBtn {
+  padding: var(--space-1) var(--space-3);
+  background: none;
+  border: none;
+  font-size: var(--font-size-xs);
+  font-family: var(--font-family);
+  color: var(--color-text-secondary);
+}
+
+.formatActive {
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+}
+
+/* Accessibility */
+.textSizeRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-2);
+}
+
+.textSizeLabel {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+}
+
+.textSizeSlider {
+  display: flex;
+  align-items: center;
+  gap: var(--space-3);
+}
+
+.textSizeSmall {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.textSizeLarge {
+  font-size: var(--font-size-base);
+  color: var(--color-text-muted);
+  white-space: nowrap;
+}
+
+.rangeInput {
+  flex: 1;
+  accent-color: var(--color-primary);
+}
+
+.sizeLabels {
+  display: flex;
+  justify-content: space-between;
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  padding: 0 var(--space-10);
+}
+
+/* Logout */
+.logoutBtn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-2);
+  width: 100%;
+  padding: var(--space-4);
+  background: none;
+  border: 2px solid var(--color-danger);
+  border-radius: var(--radius-lg);
+  color: var(--color-danger);
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-medium);
+  font-family: var(--font-family);
+}
+
+.logoutBtn:hover {
+  background-color: var(--color-danger-light);
+}
+
+/* Desktop layout */
+@media (min-width: 1024px) {
+  .profile {
+    flex-direction: row;
+    gap: var(--space-8);
+  }
+
+  .leftColumn {
+    width: 280px;
+    flex-shrink: 0;
+  }
+
+  .rightColumn {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .toggleGrid {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .toggleItem {
+    flex: 1;
+    min-width: 160px;
+  }
+
+  .toggleDesc {
+    margin-left: 44px;
+  }
+}
+
+@media (max-width: 639px) {
+  .prefGrid {
+    grid-template-columns: 1fr;
+  }
 }
