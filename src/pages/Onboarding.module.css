@@ -7,9 +7,72 @@
   padding: var(--space-4);
 }
 
+.welcomePage {
+  cursor: pointer;
+}
+
+.welcomePage:focus-visible {
+  outline: 3px solid var(--color-primary);
+  outline-offset: -12px;
+}
+
 /* Left branding panel - hidden on mobile */
 .brandPanel {
   display: none;
+}
+
+.standaloneWelcome {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+  max-width: 480px;
+  min-height: 560px;
+  padding: var(--space-8);
+  background-color: var(--color-bg-white);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.brandLogo {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--space-3);
+  margin-bottom: var(--space-8);
+}
+
+.logoIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: var(--color-primary);
+  color: var(--color-text-inverse);
+  font-weight: var(--font-weight-bold);
+  font-size: var(--font-size-sm);
+  border-radius: var(--radius-md);
+}
+
+.brandName {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text);
+  text-align: left;
+}
+
+.brandSub {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  text-align: left;
+}
+
+.welcomePrompt {
+  font-size: var(--font-size-xs);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  margin-top: var(--space-6);
+  text-align: center;
 }
 
 .container {
@@ -126,38 +189,6 @@
     padding: var(--space-8);
     flex-shrink: 0;
   }
-
-  .brandLogo {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    margin-bottom: var(--space-8);
-  }
-
-  .logoIcon {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 40px;
-    height: 40px;
-    background-color: var(--color-primary);
-    color: var(--color-text-inverse);
-    font-weight: var(--font-weight-bold);
-    font-size: var(--font-size-sm);
-    border-radius: var(--radius-md);
-  }
-
-  .brandName {
-    font-size: var(--font-size-lg);
-    font-weight: var(--font-weight-bold);
-    color: var(--color-text);
-  }
-
-  .brandSub {
-    font-size: var(--font-size-xs);
-    color: var(--color-text-muted);
-  }
-
   .brandTitle {
     font-size: var(--font-size-2xl);
     font-weight: var(--font-weight-bold);
@@ -222,5 +253,9 @@
 
   .container {
     max-width: 480px;
+  }
+
+  .standaloneWelcome {
+    width: 400px;
   }
 }

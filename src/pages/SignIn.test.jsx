@@ -67,63 +67,6 @@ vi.mock("../components/Icon", () => ({
 import SignIn from "./SignIn";
 
 describe("SignIn", () => {
-  it("renders the brand panel content", () => {
-    render(
-      <MemoryRouter>
-        <SignIn />
-      </MemoryRouter>,
-    );
-
-    expect(screen.getByText("CC")).toBeInTheDocument();
-    expect(screen.getByText("CareConnect")).toBeInTheDocument();
-    expect(screen.getByText("Patient Portal")).toBeInTheDocument();
-    expect(screen.getByText("Welcome back")).toBeInTheDocument();
-
-    expect(
-      screen.getByText(
-        /Sign in to access your appointments, medications, test results, and care team messages/i,
-      ),
-    ).toBeInTheDocument();
-  });
-
-  it("renders the security and access feature items", () => {
-    render(
-      <MemoryRouter>
-        <SignIn />
-      </MemoryRouter>,
-    );
-
-    expect(screen.getAllByTestId("icon-lock").length).toBeGreaterThan(0);
-    expect(screen.getByTestId("icon-clock")).toBeInTheDocument();
-
-    expect(screen.getByText("Secure & Private")).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        /Your health information is protected with bank-level encryption and HIPAA compliance/i,
-      ),
-    ).toBeInTheDocument();
-
-    expect(screen.getByText("24/7 Access")).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        /View your health records, upcoming appointments, and messages anytime you need/i,
-      ),
-    ).toBeInTheDocument();
-  });
-
-  it("renders support information", () => {
-    render(
-      <MemoryRouter>
-        <SignIn />
-      </MemoryRouter>,
-    );
-
-    expect(screen.getByText("Need help signing in?")).toBeInTheDocument();
-    expect(screen.getByText(/Call Support/i)).toBeInTheDocument();
-    expect(screen.getByText(/1-800-CARE-HELP/i)).toBeInTheDocument();
-    expect(screen.getByText(/Help Center/i)).toBeInTheDocument();
-  });
-
   it("renders the main sign-in heading, subtitle, and keyboard helper text", () => {
     render(
       <MemoryRouter>

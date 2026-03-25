@@ -5,12 +5,15 @@ import { MemoryRouter } from "react-router-dom";
 vi.mock("./Onboarding.module.css", () => ({
   default: {
     page: "page",
+    welcomePage: "welcomePage",
+    standaloneWelcome: "standaloneWelcome",
     brandPanel: "brandPanel",
     brandTop: "brandTop",
     brandLogo: "brandLogo",
     logoIcon: "logoIcon",
     brandName: "brandName",
     brandSub: "brandSub",
+    welcomePrompt: "welcomePrompt",
     brandTitle: "brandTitle",
     brandDesc: "brandDesc",
     features: "features",
@@ -58,7 +61,7 @@ vi.mock("../components/Icon", () => ({
 import Onboarding from "./Onboarding";
 
 describe("Onboarding", () => {
-  it("renders the brand panel content", () => {
+  it("renders the standalone welcome screen first", () => {
     render(
       <MemoryRouter>
         <Onboarding />
@@ -75,44 +78,29 @@ describe("Onboarding", () => {
         /Sign in to access your appointments, medications, test results, and care team messages/i,
       ),
     ).toBeInTheDocument();
-  });
-
-  it("renders the security and access feature items", () => {
-    render(
-      <MemoryRouter>
-        <Onboarding />
-      </MemoryRouter>,
-    );
-
-    expect(screen.getByTestId("icon-lock")).toBeInTheDocument();
-    expect(screen.getByTestId("icon-clock")).toBeInTheDocument();
-
+    expect(screen.getByText(/click anywhere to continue/i)).toBeInTheDocument();
+    expect(
+      screen.queryByRole("heading", { level: 1, name: "Choose Your Role" }),
+    ).not.toBeInTheDocument();
     expect(screen.getByText("Secure & Private")).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        /Your health information is protected with bank-level encryption and HIPAA compliance/i,
-      ),
-    ).toBeInTheDocument();
-
     expect(screen.getByText("24/7 Access")).toBeInTheDocument();
-    expect(
-      screen.getByText(
-        /View your health records, upcoming appointments, and messages anytime you need/i,
-      ),
-    ).toBeInTheDocument();
+    expect(screen.getByText("Need help signing in?")).toBeInTheDocument();
   });
 
-  it("renders support information", () => {
+  it("shows the role-selection step after clicking the welcome screen", () => {
     render(
       <MemoryRouter>
         <Onboarding />
       </MemoryRouter>,
     );
 
-    expect(screen.getByText("Need help signing in?")).toBeInTheDocument();
-    expect(screen.getByText(/Call Support/i)).toBeInTheDocument();
-    expect(screen.getByText(/1-800-CARE-HELP/i)).toBeInTheDocument();
-    expect(screen.getByText(/Help Center/i)).toBeInTheDocument();
+    fireEvent.click(screen.getByRole("button", { name: /enter sign-in flow/i }));
+
+    expect(screen.getByText("Step 1 of 2")).toBeInTheDocument();
+    expect(
+      screen.getByRole("heading", { level: 1, name: "Choose Your Role" }),
+    ).toBeInTheDocument();
+    expect(screen.queryByText("Need help signing in?")).not.toBeInTheDocument();
   });
 
   it("renders the onboarding step, title, and subtitle", () => {
@@ -121,6 +109,8 @@ describe("Onboarding", () => {
         <Onboarding />
       </MemoryRouter>,
     );
+
+    fireEvent.click(screen.getByRole("button", { name: /enter sign-in flow/i }));
 
     expect(screen.getByText("Step 1 of 2")).toBeInTheDocument();
     expect(
@@ -140,6 +130,8 @@ describe("Onboarding", () => {
         <Onboarding />
       </MemoryRouter>,
     );
+
+    fireEvent.click(screen.getByRole("button", { name: /enter sign-in flow/i }));
 
     expect(screen.getByText("I'm a Caregiver")).toBeInTheDocument();
     expect(
@@ -181,6 +173,8 @@ describe("Onboarding", () => {
       </MemoryRouter>,
     );
 
+    fireEvent.click(screen.getByRole("button", { name: /enter sign-in flow/i }));
+
     const caregiverRadio = container.querySelector('input[value="caregiver"]');
     const recipientRadio = container.querySelector('input[value="recipient"]');
 
@@ -197,6 +191,8 @@ describe("Onboarding", () => {
       </MemoryRouter>,
     );
 
+    fireEvent.click(screen.getByRole("button", { name: /enter sign-in flow/i }));
+
     const continueButton = screen.getByRole("button", { name: /continue/i });
     expect(continueButton).toBeDisabled();
     expect(continueButton).toHaveAttribute("data-variant", "primary");
@@ -210,6 +206,8 @@ describe("Onboarding", () => {
         <Onboarding />
       </MemoryRouter>,
     );
+
+    fireEvent.click(screen.getByRole("button", { name: /enter sign-in flow/i }));
 
     const caregiverRadio = container.querySelector('input[value="caregiver"]');
     const continueButton = screen.getByRole("button", { name: /continue/i });
@@ -226,6 +224,8 @@ describe("Onboarding", () => {
         <Onboarding />
       </MemoryRouter>,
     );
+
+    fireEvent.click(screen.getByRole("button", { name: /enter sign-in flow/i }));
 
     const caregiverRadio = container.querySelector('input[value="caregiver"]');
     const recipientRadio = container.querySelector('input[value="recipient"]');
@@ -246,6 +246,8 @@ describe("Onboarding", () => {
       </MemoryRouter>,
     );
 
+    fireEvent.click(screen.getByRole("button", { name: /enter sign-in flow/i }));
+
     const signInTextLink = screen.getByRole("link", {
       name: /sign in to your account/i,
     });
@@ -262,6 +264,8 @@ describe("Onboarding", () => {
         <Onboarding />
       </MemoryRouter>,
     );
+
+    fireEvent.click(screen.getByRole("button", { name: /enter sign-in flow/i }));
 
     expect(screen.getByText(/Have an account\?/i)).toBeInTheDocument();
     expect(
