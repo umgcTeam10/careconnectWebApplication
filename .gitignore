@@ -18,6 +18,8 @@ npm-debug.log*
 
 # Test coverage
 coverage/
+cypress/videos/
+cypress/screenshots/
 
 # Vite
 .vite/

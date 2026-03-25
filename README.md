@@ -30,6 +30,7 @@ The Profile page is still a lighter stub compared to the other pages. No backend
 | [Vite 6](https://vite.dev/) | Dev server and production build tool |
 | [Vitest](https://vitest.dev/) | Unit/component testing |
 | [Testing Library](https://testing-library.com/) | DOM-oriented React tests |
+| [Cypress](https://www.cypress.io/) | End-to-end browser testing |
 
 ## Project Structure
 
@@ -185,6 +186,38 @@ or
 ```bash
 pnpm test:coverage
 ```
+
+Run the Cypress end-to-end suite:
+
+```bash
+npm run test:e2e
+```
+
+Run the Cypress suite in headed mode from the terminal:
+
+```bash
+npm run test:e2e:headed
+```
+
+Run the headed suite more slowly for demos:
+
+```bash
+npm run test:e2e:headed:slow
+```
+
+Open Cypress interactively:
+
+```bash
+npm run cy:open
+```
+
+The current Cypress coverage includes 5 critical user flows:
+
+- Welcome screen to role-selection transition
+- Role selection to sign-in
+- Sign-in to dashboard
+- Primary in-app navigation across main sections
+- Core interactions in Tasks, Health Logs, and Profile
 
 ## Notes / Future Work
 
