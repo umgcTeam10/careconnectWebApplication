@@ -1,26 +1,24 @@
-# CareConnect Web App – Initial React Implementation
+# CareConnect Web App
 
 ## Project Overview
 
-CareConnect is a healthcare coordination platform designed to support caregivers and care recipients in managing daily health tasks, appointments, medications, and communication with care teams. The application provides a shared interface where caregivers can track and manage the health needs of the people they support, and care recipients can stay informed and engaged with their own care.
+CareConnect is a healthcare coordination platform designed to support caregivers and care recipients in managing appointments, medications, messages, and other daily health tasks.
 
-This repository contains the initial React-based web implementation of CareConnect, built from a responsive Figma design. The focus of this version is on establishing a solid front-end foundation — project structure, routing, a shared responsive layout, semantic HTML, and accessibility-conscious patterns — rather than full backend functionality or production-ready features. All data shown in the app is placeholder content used for layout and demonstration purposes.
+This repository contains the React-based web client for CareConnect. The current implementation focuses on front-end structure, routing, responsive UI, reusable components, and accessibility-conscious patterns rather than backend integration. All data shown in the app is placeholder content for layout and demonstration purposes.
 
 ## Current Scope
 
-This initial implementation includes:
+The current implementation includes:
 
-- A clean, organized React project structure ready for team collaboration
-- Client-side routing across all primary application screens
-- A shared application layout (header, sidebar navigation, notification banner, bottom navigation) that adapts across breakpoints
-- Fully rendered pages for Dashboard, Tasks, Messages, Calendar, Health Logs, Profile, Sign In, and Onboarding
-- Responsive behavior targeting mobile, tablet, and desktop viewports
-- Semantic HTML throughout all pages and components
-- Accessibility foundations including keyboard navigation, proper labeling, and a skip-to-content link
-- A centralized mock data module for easy future replacement with real API responses
-- Reusable UI components extracted from repeated patterns in the design
+- Client-side routing for the public flow and the main application
+- Shared application layout for authenticated pages
+- Responsive pages for Dashboard, Tasks, Messages, Calendar, Health Logs, Profile, Onboarding, and Sign In
+- A two-step public entry flow: standalone welcome screen, then role selection, then sign-in
+- Reusable UI components and CSS Modules for scoped styling
+- Accessibility-minded markup including semantic HTML, labeling, keyboard support, and skip navigation
+- Placeholder data and visual-only auth flow behavior
 
-The Profile page is implemented as a lighter stub compared to the other screens. No backend services, authentication logic, or persistent data storage are included — the Sign In and Onboarding screens are visual implementations only.
+The Profile page is still a lighter stub compared to the other pages. No backend services, persistent storage, or real authentication are included yet.
 
 ## Tech Stack
 
@@ -28,132 +26,180 @@ The Profile page is implemented as a lighter stub compared to the other screens.
 |---|---|
 | [React 19](https://react.dev/) | UI component library |
 | [React Router 7](https://reactrouter.com/) | Client-side routing |
-| [CSS Modules](https://github.com/css-modules/css-modules) | Scoped, component-level styling |
-| [Vite 6](https://vite.dev/) | Build tool and development server |
-
-No additional UI frameworks, icon libraries, or state management libraries were added. Icons are implemented as inline SVGs within a custom `Icon` component to keep dependencies minimal.
+| [CSS Modules](https://github.com/css-modules/css-modules) | Scoped component styling |
+| [Vite 6](https://vite.dev/) | Dev server and production build tool |
+| [Vitest](https://vitest.dev/) | Unit/component testing |
+| [Testing Library](https://testing-library.com/) | DOM-oriented React tests |
 
 ## Project Structure
 
+```text
+careconnectWebApplication/
+|-- index.html
+|-- package.json
+|-- vite.config.js
+|-- vercel.json
+`-- src/
+    |-- main.jsx
+    |-- App.jsx
+    |-- components/
+    |-- data/
+    |-- layouts/
+    |-- pages/
+    |   |-- Calendar.jsx
+    |   |-- Dashboard.jsx
+    |   |-- HealthLogs.jsx
+    |   |-- Messages.jsx
+    |   |-- Onboarding.jsx
+    |   |-- Profile.jsx
+    |   |-- SignIn.jsx
+    |   `-- Tasks.jsx
+    `-- styles/
+        `-- global.css
 ```
-careconnect/
-├── index.html                  Entry HTML document
-├── package.json                Dependencies and scripts
-├── vite.config.js              Vite configuration
-└── src/
-    ├── main.jsx                Application entry point (BrowserRouter setup)
-    ├── App.jsx                 Route definitions
-    ├── components/             Reusable UI components
-    │   ├── Badge.jsx           Status and priority labels
-    │   ├── BottomNav.jsx       Mobile/tablet bottom navigation bar
-    │   ├── Button.jsx          Button with variant and size options
-    │   ├── Card.jsx            Card container with padding options
-    │   ├── Header.jsx          Sticky top header with hamburger menu
-    │   ├── Icon.jsx            Inline SVG icon system
-    │   ├── NotificationBanner.jsx  Appointment notification strip
-    │   ├── SectionHeader.jsx   Section title with optional action
-    │   ├── Sidebar.jsx         Navigation drawer (mobile) / fixed sidebar (desktop)
-    │   └── StatCard.jsx        Statistic display card
-    ├── data/
-    │   └── mockData.js         Centralized placeholder data
-    ├── layouts/
-    │   └── AppLayout.jsx       Shared app shell (header, nav, content area)
-    ├── pages/
-    │   ├── Calendar.jsx        Calendar view with event schedule
-    │   ├── Dashboard.jsx       Main dashboard with health summary and tasks
-    │   ├── HealthLogs.jsx      Health logs with summary, filters, and entries
-    │   ├── Messages.jsx        Chat interface with quick replies
-    │   ├── Onboarding.jsx      Role selection (first-time setup)
-    │   ├── Profile.jsx         User profile (stub)
-    │   ├── SignIn.jsx          Sign-in form
-    │   └── Tasks.jsx           Task management with tabs and search
-    └── styles/
-        └── global.css          CSS custom properties, reset, and utility classes
-```
-
-Each component and page has a co-located `.module.css` file for scoped styling. Design tokens (colors, spacing, typography, shadows) are defined as CSS custom properties in `global.css` and referenced throughout.
 
 ## Available Routes
 
-| Route | Page | Status |
+| Route | Page | Notes |
 |---|---|---|
-| `/` | Onboarding (role selection) | Implemented |
-| `/signin` | Sign In | Implemented |
-| `/dashboard` | Dashboard | Implemented |
-| `/tasks` | Tasks | Implemented |
-| `/messages` | Messages | Implemented |
-| `/calendar` | Calendar | Implemented |
-| `/health-logs` | Health Logs | Implemented |
-| `/profile` | Profile | Stub (basic layout with placeholder content) |
-| `/*` | Redirects to `/dashboard` | — |
+| `/` | Onboarding | Opens on the standalone welcome screen, then advances to role selection on click |
+| `/signin` | Sign In | Visual sign-in form |
+| `/dashboard` | Dashboard | Main app page |
+| `/tasks` | Tasks | Task management page |
+| `/messages` | Messages | Messaging page |
+| `/calendar` | Calendar | Calendar and schedule page |
+| `/health-logs` | Health Logs | Health history and tracking page |
+| `/profile` | Profile | Basic placeholder profile page |
+| `*` | Redirect | Unknown routes redirect to `/dashboard` |
 
-The Onboarding and Sign In pages render outside the main app layout. All other routes share the `AppLayout` shell, which includes the header, sidebar, notification banner, and bottom navigation.
+The Onboarding and Sign In routes render outside the shared app shell. The dashboard and all other in-app routes use the common layout.
 
-## Accessibility Considerations
+## Accessibility
 
-This implementation was built with accessibility as a foundational concern:
+This implementation includes:
 
-- **Semantic HTML**: Pages use `header`, `nav`, `main`, `section`, `aside`, `fieldset`, `legend`, and `dl` elements where appropriate rather than generic `div` wrappers.
-- **Heading hierarchy**: Each page context has one `h1` (rendered in the header), `h2` elements for major content sections, and `h3` for subsections. No heading levels are skipped.
-- **Keyboard navigation**: All interactive elements (links, buttons, form inputs, tabs) are reachable and operable via keyboard. Focus styles are visible on inputs and interactive controls.
-- **Proper element usage**: Navigation uses `a` / `NavLink` elements. Actions use `button` elements. Forms use `label` elements associated with their inputs.
-- **Skip-to-content link**: A visually hidden skip link appears on focus at the top of every page using the app layout, allowing keyboard users to bypass navigation.
-- **ARIA usage**: ARIA attributes are used sparingly and only where native semantics are insufficient — for example, `aria-label` on icon-only buttons, `role="tablist"` / `role="tab"` on the task filter tabs, and `role="log"` on the message history.
-- **Form accessibility**: All inputs have visible labels or associated `label` elements. Required fields are indicated visually.
+- Semantic elements such as `main`, `section`, `fieldset`, `legend`, and labeled form controls
+- Keyboard-reachable interactive controls
+- Focus styling on interactive elements
+- Skip navigation support in the shared app layout
+- Minimal ARIA usage where native semantics are not enough
 
-## Responsive Design
+## Responsive Behavior
 
-The layout adapts across three target breakpoints based on the Figma design:
+The UI is designed for mobile, tablet, and desktop breakpoints:
 
-| Breakpoint | Viewport | Behavior |
-|---|---|---|
-| Mobile | 375px | Stacked single-column layout. Bottom navigation bar is the primary nav. Sidebar opens as a drawer via the hamburger menu. Cards and stats stack vertically. |
-| Tablet | 768px | Stat cards and grids shift to horizontal arrangements. Bottom nav remains active. Sidebar is still a drawer. |
-| Desktop | 1024px+ (targeting 1440px) | Fixed sidebar is always visible. Bottom nav is hidden. Content areas use two-column grids where appropriate (Dashboard, Calendar, Health Logs). Hamburger menu is hidden. |
+- Mobile: stacked layout with bottom navigation
+- Tablet: expanded grids while keeping mobile navigation patterns
+- Desktop: persistent sidebar and wider content layouts
 
-The layout does not simply scale the desktop view down — each breakpoint has intentional structural changes to the navigation, grid layout, and content organization.
+## Running Locally
 
-## Running the Project
+Prerequisite: Node.js 18+ installed.
 
-**Prerequisites**: Node.js 18+ and npm installed.
+Install dependencies:
 
 ```bash
-# Navigate to the project directory
-cd careconnect
-
-# Install dependencies
 npm install
+```
 
-# Start the development server
+or
+
+```bash
+pnpm install
+```
+
+Start the development server:
+
+```bash
 npm run dev
 ```
 
-The app will be available at **http://localhost:3000**.
+or
 
-To create a production build:
+```bash
+pnpm dev
+```
+
+The app runs locally at `http://localhost:3000`.
+
+## Building
+
+Create a production build:
 
 ```bash
 npm run build
 ```
 
-The output will be written to the `dist/` directory and can be previewed with `npm run preview`.
+or
+
+```bash
+pnpm build
+```
+
+Preview the production build locally:
+
+```bash
+npm run preview
+```
+
+or
+
+```bash
+pnpm preview
+```
+
+## Testing
+
+Run the full test suite:
+
+```bash
+npm test
+```
+
+or
+
+```bash
+pnpm test
+```
+
+Run a specific test file:
+
+```bash
+npm test -- src/pages/Onboarding.test.jsx
+```
+
+or
+
+```bash
+pnpm test -- src/pages/Onboarding.test.jsx
+```
+
+Run coverage:
+
+```bash
+npm run test:coverage
+```
+
+or
+
+```bash
+pnpm test:coverage
+```
 
 ## Notes / Future Work
 
-This is an initial scaffold intended to establish front-end structure and demonstrate early progress. Likely next steps include:
+Likely next steps include:
 
-- Expanding the Profile page with full account settings and preferences
-- Connecting pages to a backend API and replacing mock data with real responses
-- Implementing authentication flow (the current Sign In page is visual only)
-- Adding form validation and error handling
-- Refining responsive behavior and testing across real devices
-- Conducting accessibility audits with screen readers and automated tools (axe, Lighthouse)
-- Adding unit and integration tests
-- Implementing state management as data requirements grow
+- Connecting pages to a backend API
+- Replacing placeholder data with real data sources
+- Implementing real authentication and session handling
+- Adding form validation and error states
+- Expanding the Profile page
+- Adding more deployment and CI validation
 
 ## Team
 
-**Team 10** — SWEN 661
+**Team 10 - SWEN 661**
 
 - Joriel Rivas
 - Chastity Sapp
