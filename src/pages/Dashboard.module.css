@@ -4,6 +4,12 @@
   gap: var(--space-6);
 }
 
+.mainContent {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
 .pageTitle {
   font-size: var(--font-size-xl);
   font-weight: var(--font-weight-bold);
@@ -97,6 +103,154 @@
   color: var(--color-text-secondary);
 }
 
+/* Health Summary vitals */
+.summarySubtitle {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+  margin-bottom: var(--space-3);
+}
+
+.vitalRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: var(--space-3) 0;
+}
+
+.vitalRow + .vitalRow {
+  border-top: 1px solid var(--color-border);
+}
+
+.vitalInfo {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+}
+
+.vitalIcon {
+  color: var(--color-danger);
+}
+
+.vitalLabel {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.vitalValue {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.viewHistoryLink {
+  display: block;
+  text-align: center;
+  font-size: var(--font-size-sm);
+  margin-top: var(--space-3);
+}
+
+/* Right sidebar */
+.rightSidebar {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-4);
+}
+
+.appointmentCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.appointmentHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.appointmentTitle {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.appointmentType {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.appointmentName {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-bold);
+}
+
+.appointmentMeta {
+  display: flex;
+  align-items: center;
+  gap: var(--space-2);
+  font-size: var(--font-size-xs);
+  color: var(--color-text-secondary);
+}
+
+.appointmentProvider {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+.careTeamCard {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-3);
+}
+
+.careTeamIcon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background-color: var(--color-primary-light);
+  color: var(--color-primary);
+  border-radius: var(--radius-full);
+}
+
+.careTeamTitle {
+  font-size: var(--font-size-base);
+  font-weight: var(--font-weight-semibold);
+}
+
+.careTeamText {
+  font-size: var(--font-size-sm);
+  color: var(--color-text-secondary);
+}
+
+/* Recent Wellness Check */
+.wellnessCheckItem {
+  display: flex;
+  gap: var(--space-3);
+  align-items: flex-start;
+}
+
+.wellnessCheckIcon {
+  color: var(--color-success);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+
+.wellnessCheckTitle {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-semibold);
+}
+
+.wellnessCheckDetail {
+  font-size: var(--font-size-sm);
+  color: var(--color-success);
+}
+
+.wellnessCheckDate {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
+  margin-top: var(--space-1);
+}
+
 /* Tablet: stats in row */
 @media (min-width: 640px) {
   .statsGrid {
@@ -108,19 +262,20 @@
   }
 }
 
-/* Desktop: two-column layout */
+/* Desktop: main + right sidebar layout */
 @media (min-width: 1024px) {
   .dashboard {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-6);
-  }
-
-  .dashboard > section:first-child {
-    grid-column: 1 / -1;
-  }
-
-  .statsGrid {
     flex-direction: row;
+    gap: var(--space-8);
+  }
+
+  .mainContent {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .rightSidebar {
+    width: 300px;
+    flex-shrink: 0;
   }
 }

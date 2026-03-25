@@ -4,6 +4,18 @@
   gap: var(--space-6);
 }
 
+.leftColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
+.rightColumn {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-6);
+}
+
 .summaryHeader {
   display: flex;
   justify-content: space-between;
@@ -152,15 +164,25 @@
   color: var(--color-text-secondary);
 }
 
-/* Search & logs */
-.searchRow {
+/* Recent logs header */
+.recentHeader {
   display: flex;
+  flex-direction: column;
   gap: var(--space-3);
 }
 
+.recentActions {
+  display: flex;
+  gap: var(--space-3);
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* Search & logs */
 .search {
   position: relative;
   flex: 1;
+  min-width: 180px;
 }
 
 .searchIcon {
@@ -173,7 +195,7 @@
 
 .searchInput {
   width: 100%;
-  padding: var(--space-3) var(--space-3) var(--space-3) var(--space-10);
+  padding: var(--space-2) var(--space-3) var(--space-2) var(--space-10);
   border: 1px solid var(--color-border);
   border-radius: var(--radius-md);
   font-size: var(--font-size-sm);
@@ -183,11 +205,6 @@
 .searchInput:focus {
   outline: 2px solid var(--color-primary);
   outline-offset: -1px;
-}
-
-.logActions {
-  display: flex;
-  gap: var(--space-3);
 }
 
 .entriesHeader {
@@ -245,9 +262,19 @@
   color: var(--color-text-muted);
 }
 
-.logValues {
-  font-size: var(--font-size-sm);
+.logMeta {
+  font-size: var(--font-size-xs);
   color: var(--color-text-secondary);
+}
+
+.logReading {
+  font-size: var(--font-size-lg);
+  font-weight: var(--font-weight-bold);
+}
+
+.logNotes {
+  font-size: var(--font-size-xs);
+  color: var(--color-text-muted);
 }
 
 @media (min-width: 640px) {
@@ -258,12 +285,21 @@
 
 @media (min-width: 1024px) {
   .healthLogs {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: var(--space-6);
+    flex-direction: row;
+    gap: var(--space-8);
   }
 
-  .healthLogs > section:first-child {
-    grid-column: 1 / -1;
+  .leftColumn {
+    width: 340px;
+    flex-shrink: 0;
+  }
+
+  .rightColumn {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .summaryGrid {
+    grid-template-columns: 1fr 1fr;
   }
 }

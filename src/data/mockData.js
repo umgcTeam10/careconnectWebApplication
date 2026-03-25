@@ -42,10 +42,29 @@ export const recentLogs = [
   {
     id: 1,
     type: 'vitals',
-    title: 'Blood Pressure Check',
-    date: '2025-07-24',
+    title: 'Blood pressure Check',
+    date: '2025-12-19',
     details: 'Resting - Right Arm',
-    values: { systolic: 120, diastolic: 80 },
+    values: { systolic: 120, diastolic: 80, heartRate: 72 },
+    reading: '120/80',
+  },
+  {
+    id: 2,
+    type: 'lab',
+    title: 'Glucose Check',
+    date: '2025-12-17',
+    details: 'Resting - Right Arm',
+    reading: '95 mg/dL',
+    notes: 'Fasting · Range: normal',
+  },
+  {
+    id: 3,
+    type: 'wellness',
+    title: 'Weight Check',
+    date: '2025-12-15',
+    details: 'Resting - Right Arm',
+    reading: '70 kg',
+    notes: 'Weekly trend: good · Hydration: good',
   },
 ];
 
