@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import styles from './Profile.module.css';
 import Card from '../components/Card';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
+
+const TIME_FORMATS = ['12h', '24h'];
 
 export default function Profile() {
   const [pushNotif, setPushNotif] = useState(true);
@@ -10,6 +12,21 @@ export default function Profile() {
   const [taskReminders, setTaskReminders] = useState(true);
   const [darkMode, setDarkMode] = useState(false);
   const [timeFormat, setTimeFormat] = useState('12h');
+  const formatRefs = useRef([]);
+
+  const handleFormatKeyDown = (e, index) => {
+    let newIndex;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      newIndex = (index + 1) % TIME_FORMATS.length;
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      newIndex = (index - 1 + TIME_FORMATS.length) % TIME_FORMATS.length;
+    } else {
+      return;
+    }
+    e.preventDefault();
+    setTimeFormat(TIME_FORMATS[newIndex]);
+    formatRefs.current[newIndex]?.focus();
+  };
 
   return (
     <div className={styles.profile}>
@@ -66,7 +83,7 @@ export default function Profile() {
           <h2 className={styles.settingsTitle}>Settings</h2>
           <div className={styles.settingsSearch}>
             <Icon name="search" size={16} className={styles.searchIcon} />
-            <input type="search" placeholder="Search settings (Ctrl+I)" className={styles.searchInput} />
+            <input type="search" placeholder="Search settings (Ctrl+I)" className={styles.searchInput} aria-label="Search settings" />
           </div>
         </div>
 
@@ -140,17 +157,19 @@ export default function Profile() {
             <div className={styles.prefItem}>
               <div>
                 <span className={styles.prefLabel}>Time Format</span>
-                <div className={styles.formatToggle}>
-                  <button
-                    type="button"
-                    className={`${styles.formatBtn} ${timeFormat === '12h' ? styles.formatActive : ''}`}
-                    onClick={() => setTimeFormat('12h')}
-                  >12h</button>
-                  <button
-                    type="button"
-                    className={`${styles.formatBtn} ${timeFormat === '24h' ? styles.formatActive : ''}`}
-                    onClick={() => setTimeFormat('24h')}
-                  >24h</button>
+                <div className={styles.formatToggle} role="group" aria-label="Time format">
+                  {TIME_FORMATS.map((fmt, i) => (
+                    <button
+                      key={fmt}
+                      ref={(el) => (formatRefs.current[i] = el)}
+                      type="button"
+                      tabIndex={timeFormat === fmt ? 0 : -1}
+                      className={`${styles.formatBtn} ${timeFormat === fmt ? styles.formatActive : ''}`}
+                      onClick={() => setTimeFormat(fmt)}
+                      onKeyDown={(e) => handleFormatKeyDown(e, i)}
+                      aria-pressed={timeFormat === fmt}
+                    >{fmt}</button>
+                  ))}
                 </div>
               </div>
             </div>
@@ -170,7 +189,7 @@ export default function Profile() {
             <span className={styles.textSizeLabel}>Text Size</span>
             <div className={styles.textSizeSlider}>
               <span className={styles.textSizeSmall}>A Small</span>
-              <input type="range" min="1" max="5" defaultValue="3" className={styles.rangeInput} />
+              <input type="range" min="1" max="5" defaultValue="3" className={styles.rangeInput} aria-label="Text size" />
               <span className={styles.textSizeLarge}>A Large</span>
             </div>
           </div>

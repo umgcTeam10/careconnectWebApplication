@@ -44,7 +44,7 @@ export default function Messages() {
         </div>
         <div className={styles.contactSearch}>
           <Icon name="search" size={16} className={styles.contactSearchIcon} />
-          <input type="search" placeholder="Search messages..." className={styles.contactSearchInput} />
+          <input type="search" placeholder="Search messages..." className={styles.contactSearchInput} aria-label="Search messages" />
         </div>
         <ul className={styles.contactList}>
           {contacts.map((contact) => (
@@ -100,7 +100,7 @@ export default function Messages() {
               <p className={styles.messageText}>{msg.text}</p>
             </div>
           ))}
-          <p className={styles.typing}>Robert is typing...</p>
+          <p className={styles.typing} aria-live="polite">Robert is typing...</p>
         </div>
 
         <div className={styles.quickReplies}>

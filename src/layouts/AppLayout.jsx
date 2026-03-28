@@ -33,6 +33,7 @@ export default function AppLayout() {
         <Header
           title={pageTitle}
           onMenuToggle={() => setSidebarOpen((prev) => !prev)}
+          isOpen={sidebarOpen}
         />
         <NotificationBanner appointment={upcomingAppointment} />
 

@@ -17,25 +17,25 @@
 
 .primary {
   background-color: var(--color-primary-light);
-  color: var(--color-primary);
+  color: var(--color-primary-hover);
 }
 
 .success {
   background-color: var(--color-success-light);
-  color: var(--color-success);
+  color: #15803d;
 }
 
 .warning {
   background-color: var(--color-warning-light);
-  color: var(--color-warning);
+  color: #b45309;
 }
 
 .danger {
   background-color: var(--color-danger-light);
-  color: var(--color-danger);
+  color: #b91c1c;
 }
 
 .info {
   background-color: var(--color-info-light);
-  color: var(--color-info);
+  color: #0369a1;
 }

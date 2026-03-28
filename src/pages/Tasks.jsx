@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import styles from './Tasks.module.css';
 import Card from '../components/Card';
 import StatCard from '../components/StatCard';
@@ -11,8 +11,27 @@ const TABS = ['Upcoming', 'Today', 'Overdue', 'Done'];
 
 export default function Tasks() {
   const [activeTab, setActiveTab] = useState('Today');
+  const tabRefs = useRef([]);
 
   const displayedTasks = activeTab === 'Overdue' ? overdueTasks : todaysTasks;
+
+  const handleTabKeyDown = (e, index) => {
+    let newIndex;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      newIndex = (index + 1) % TABS.length;
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      newIndex = (index - 1 + TABS.length) % TABS.length;
+    } else if (e.key === 'Home') {
+      newIndex = 0;
+    } else if (e.key === 'End') {
+      newIndex = TABS.length - 1;
+    } else {
+      return;
+    }
+    e.preventDefault();
+    setActiveTab(TABS[newIndex]);
+    tabRefs.current[newIndex]?.focus();
+  };
 
   return (
     <div className={styles.tasks}>
@@ -58,13 +77,18 @@ export default function Tasks() {
           )}
 
           <div className={styles.tabs} role="tablist" aria-label="Task time filters">
-            {TABS.map((tab) => (
+            {TABS.map((tab, i) => (
               <button
                 key={tab}
+                id={`tab-${tab.toLowerCase()}`}
+                ref={(el) => (tabRefs.current[i] = el)}
                 role="tab"
                 aria-selected={activeTab === tab}
+                aria-controls="task-panel"
+                tabIndex={activeTab === tab ? 0 : -1}
                 className={`${styles.tab} ${activeTab === tab ? styles.activeTab : ''}`}
                 onClick={() => setActiveTab(tab)}
+                onKeyDown={(e) => handleTabKeyDown(e, i)}
                 type="button"
               >
                 {tab}
@@ -72,7 +96,13 @@ export default function Tasks() {
             ))}
           </div>
 
-          <ul className={styles.taskList} aria-label={`${activeTab} tasks`}>
+          <ul
+            id="task-panel"
+            role="tabpanel"
+            aria-labelledby={`tab-${activeTab.toLowerCase()}`}
+            className={styles.taskList}
+            tabIndex={0}
+          >
             {displayedTasks.map((task) => (
               <li key={task.id}>
                 <Card className={styles.taskCard}>

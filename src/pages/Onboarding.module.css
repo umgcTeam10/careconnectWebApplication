@@ -41,7 +41,6 @@
 }
 
 .roleGroup {
-  border: none;
   display: flex;
   flex-direction: column;
   gap: var(--space-4);
@@ -50,10 +49,14 @@
 
 .roleCard {
   display: block;
+  width: 100%;
+  text-align: left;
   padding: var(--space-4);
+  background: none;
   border: 2px solid var(--color-border);
   border-radius: var(--radius-lg);
   cursor: pointer;
+  font-family: var(--font-family);
   transition: border-color 0.15s ease, background-color 0.15s ease;
 }
 
@@ -67,12 +70,14 @@
 }
 
 .roleTitle {
+  display: block;
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-bold);
   margin-bottom: var(--space-2);
 }
 
 .roleDesc {
+  display: block;
   font-size: var(--font-size-sm);
   color: var(--color-text-secondary);
   margin-bottom: var(--space-3);
@@ -155,7 +160,7 @@
 
   .brandSub {
     font-size: var(--font-size-xs);
-    color: var(--color-text-muted);
+    color: var(--color-text-secondary);
   }
 
   .brandTitle {

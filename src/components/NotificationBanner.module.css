@@ -29,7 +29,7 @@
   display: flex;
   gap: var(--space-3);
   font-size: var(--font-size-xs);
-  color: var(--color-text-muted);
+  color: rgba(255, 255, 255, 0.7);
   margin-top: var(--space-1);
 }
 

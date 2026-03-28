@@ -1,9 +1,9 @@
 import styles from './SectionHeader.module.css';
 
-export default function SectionHeader({ title, action, actionLabel, onAction }) {
+export default function SectionHeader({ title, action, actionLabel, onAction, id }) {
   return (
     <div className={styles.sectionHeader}>
-      <h2 className={styles.title}>{title}</h2>
+      <h2 id={id} className={styles.title}>{title}</h2>
       {actionLabel && (
         <button className={styles.action} onClick={onAction} type="button">
           {actionLabel}

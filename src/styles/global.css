@@ -18,9 +18,9 @@
   --color-info-light: #e0f2fe;
 
   --color-text: #1e293b;
-  --color-text-secondary: #64748b;
+  --color-text-secondary: #4b5563;
   --color-text-inverse: #ffffff;
-  --color-text-muted: #94a3b8;
+  --color-text-muted: #6b7280;
 
   --color-bg: #f1f5f9;
   --color-bg-white: #ffffff;
@@ -141,6 +141,18 @@ ol {
   text-decoration: none;
 }
 
+/* ===== Focus styles for keyboard navigation ===== */
+*:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 2px;
+}
+
+/* Invert focus ring on dark backgrounds */
+.skip-link:focus-visible,
+[data-focus-light]:focus-visible {
+  outline-color: #ffffff;
+}
+
 /* ===== Utility Classes ===== */
 .visually-hidden {
   position: absolute;
@@ -151,5 +163,16 @@ ol {
   overflow: hidden;
   clip: rect(0, 0, 0, 0);
   white-space: nowrap;
+  border: 0;
+}
+
+/* For inputs that must stay keyboard-focusable (clip breaks Safari focus) */
+.visually-hidden-input {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: 0;
+  opacity: 0;
   border: 0;
 }

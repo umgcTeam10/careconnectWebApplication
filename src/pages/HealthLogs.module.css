@@ -112,6 +112,11 @@
   background-color: var(--color-bg);
 }
 
+.filterBtn:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 2px;
+}
+
 .activeFilter {
   background-color: var(--color-navy);
   color: var(--color-text-inverse);

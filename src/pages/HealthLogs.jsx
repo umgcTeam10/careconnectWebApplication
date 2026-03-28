@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef } from 'react';
 import styles from './HealthLogs.module.css';
 import Card from '../components/Card';
 import SectionHeader from '../components/SectionHeader';
@@ -17,6 +17,21 @@ const TYPE_BADGE_MAP = {
 
 export default function HealthLogs() {
   const [activeFilter, setActiveFilter] = useState('All');
+  const filterRefs = useRef([]);
+
+  const handleFilterKeyDown = (e, index) => {
+    let newIndex;
+    if (e.key === 'ArrowRight' || e.key === 'ArrowDown') {
+      newIndex = (index + 1) % FILTERS.length;
+    } else if (e.key === 'ArrowLeft' || e.key === 'ArrowUp') {
+      newIndex = (index - 1 + FILTERS.length) % FILTERS.length;
+    } else {
+      return;
+    }
+    e.preventDefault();
+    setActiveFilter(FILTERS[newIndex]);
+    filterRefs.current[newIndex]?.focus();
+  };
 
   return (
     <div className={styles.healthLogs}>
@@ -64,12 +79,15 @@ export default function HealthLogs() {
         <section aria-labelledby="filters-heading" className={styles.section}>
           <h3 id="filters-heading" className={styles.filtersLabel}>Filters</h3>
           <div className={styles.filters} role="group" aria-label="Log type filters">
-            {FILTERS.map((f) => (
+            {FILTERS.map((f, i) => (
               <button
                 key={f}
+                ref={(el) => (filterRefs.current[i] = el)}
                 type="button"
+                tabIndex={activeFilter === f ? 0 : -1}
                 className={`${styles.filterBtn} ${activeFilter === f ? styles.activeFilter : ''}`}
                 onClick={() => setActiveFilter(f)}
+                onKeyDown={(e) => handleFilterKeyDown(e, i)}
                 aria-pressed={activeFilter === f}
               >
                 {f}
@@ -85,9 +103,13 @@ export default function HealthLogs() {
             </h3>
             <span className={styles.activityMeta}>6/7 Days</span>
           </div>
-          <div className={styles.activityChart} aria-label="Weekly activity chart">
+          <div
+            className={styles.activityChart}
+            role="img"
+            aria-label={`Weekly activity chart: ${weeklyActivity.map((d) => `${d.day} level ${d.level}`).join(', ')}`}
+          >
             {weeklyActivity.map((d) => (
-              <div key={d.day} className={styles.activityDay}>
+              <div key={d.day} className={styles.activityDay} aria-hidden="true">
                 <div
                   className={styles.activityBar}
                   style={{
@@ -97,7 +119,6 @@ export default function HealthLogs() {
                         : 'var(--color-navy)',
                     opacity: d.level === 0 ? 1 : 0.3 + d.level * 0.23,
                   }}
-                  aria-label={`${d.day}: activity level ${d.level}`}
                 />
                 <span className={styles.activityLabel}>{d.day}</span>
               </div>

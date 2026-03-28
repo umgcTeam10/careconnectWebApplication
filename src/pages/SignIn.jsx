@@ -1,4 +1,3 @@
-import { Link } from 'react-router-dom';
 import styles from './SignIn.module.css';
 import Button from '../components/Button';
 import Icon from '../components/Icon';
@@ -109,11 +108,9 @@ export default function SignIn() {
             <span>Remember me on this device</span>
           </label>
 
-          <Link to="/dashboard">
-            <Button variant="primary" fullWidth size="lg" type="submit">
-              Sign in
-            </Button>
-          </Link>
+          <Button variant="primary" fullWidth size="lg" to="/dashboard">
+            Sign in
+          </Button>
         </form>
 
         <div className={styles.dividerRow}>
