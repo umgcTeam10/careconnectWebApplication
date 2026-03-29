@@ -49,7 +49,7 @@ export default function Tasks() {
           </div>
         </section>
 
-        <section aria-labelledby="task-list-heading" className={styles.section}>
+        <section aria-label="Task list" className={styles.section}>
           <div className={styles.actions}>
             <Button variant="primary" size="sm">
               <Icon name="plus" size={16} /> Add Task

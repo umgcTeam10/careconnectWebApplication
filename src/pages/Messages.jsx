@@ -11,8 +11,8 @@ const contacts = [
 ];
 
 const quickContactAvatars = [
-  { name: 'Sarah', role: 'Caregiver', initials: 'SJ', color: '#f59e0b' },
-  { name: 'Dr. Martinez', role: 'Physician', initials: 'DM', color: '#16a34a' },
+  { name: 'Sarah', role: 'Caregiver', initials: 'SJ', color: '#b45309' },
+  { name: 'Dr. Martinez', role: 'Physician', initials: 'DM', color: '#15803d' },
   { name: 'Nurse Chen', role: 'Nurse', initials: 'NC', color: '#dc2626' },
 ];
 

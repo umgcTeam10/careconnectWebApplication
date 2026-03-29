@@ -304,6 +304,11 @@
   background-color: var(--color-primary-light);
 }
 
+.contactActive .contactLastMsg,
+.contactActive .contactTime {
+  color: var(--color-text-secondary);
+}
+
 .contactAvatar {
   width: 36px;
   height: 36px;
