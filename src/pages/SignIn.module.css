@@ -24,7 +24,7 @@
 .skipNav {
   text-align: center;
   font-size: var(--font-size-xs);
-  color: var(--color-primary);
+  color: var(--color-primary-hover);
   padding: var(--space-2) var(--space-3);
   background-color: var(--color-primary-light);
   border-radius: var(--radius-md);
@@ -196,7 +196,7 @@
 
   .brandSub {
     font-size: var(--font-size-xs);
-    color: var(--color-text-muted);
+    color: var(--color-text-secondary);
   }
 
   .brandTitle {

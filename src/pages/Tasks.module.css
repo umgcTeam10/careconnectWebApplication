@@ -75,7 +75,7 @@
   gap: var(--space-3);
   background-color: var(--color-warning-light);
   border-color: var(--color-warning);
-  color: var(--color-warning);
+  color: #92400e;
   font-size: var(--font-size-sm);
   font-weight: var(--font-weight-medium);
 }
@@ -108,6 +108,11 @@
 
 .tab:hover {
   color: var(--color-text);
+}
+
+.tab:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: -2px;
 }
 
 .activeTab {

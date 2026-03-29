@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styles from './Button.module.css';
 
 export default function Button({
@@ -9,6 +10,7 @@ export default function Button({
   onClick,
   disabled = false,
   className = '',
+  to,
   ...rest
 }) {
   const classNames = [
@@ -20,6 +22,14 @@ export default function Button({
   ]
     .filter(Boolean)
     .join(' ');
+
+  if (to && !disabled) {
+    return (
+      <Link to={to} className={classNames} {...rest}>
+        {children}
+      </Link>
+    );
+  }
 
   return (
     <button

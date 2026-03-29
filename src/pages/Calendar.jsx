@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import styles from './Calendar.module.css';
 import Card from '../components/Card';
 import Badge from '../components/Badge';
@@ -35,10 +35,34 @@ const MONTH_NAMES = [
 
 export default function Calendar() {
   const [currentDate, setCurrentDate] = useState(new Date(2026, 0, 26));
+  const gridRef = useRef(null);
+  const shouldFocusRef = useRef(false);
   const year = currentDate.getFullYear();
   const month = currentDate.getMonth();
   const selectedDay = currentDate.getDate();
   const days = generateCalendarDays(year, month);
+
+  useEffect(() => {
+    if (shouldFocusRef.current && gridRef.current) {
+      const selected = gridRef.current.querySelector('[aria-current="date"]');
+      if (selected) selected.focus();
+      shouldFocusRef.current = false;
+    }
+  });
+
+  const handleGridKeyDown = (e) => {
+    let offset;
+    switch (e.key) {
+      case 'ArrowLeft':  offset = -1; break;
+      case 'ArrowRight': offset = 1;  break;
+      case 'ArrowUp':    offset = -7; break;
+      case 'ArrowDown':  offset = 7;  break;
+      default: return;
+    }
+    e.preventDefault();
+    shouldFocusRef.current = true;
+    setCurrentDate(new Date(year, month, selectedDay + offset));
+  };
 
   const goToPrevMonth = () => {
     setCurrentDate(new Date(year, month - 1, 1));
@@ -82,34 +106,42 @@ export default function Calendar() {
             </button>
           </div>
 
-          <div className={styles.dayHeaders} role="row">
+          <div className={styles.dayHeaders} aria-hidden="true">
             {DAYS.map((d) => (
-              <span key={d} className={styles.dayHeader} role="columnheader">
-                {d}
-              </span>
+              <span key={d} className={styles.dayHeader}>{d}</span>
             ))}
           </div>
 
-          <div className={styles.daysGrid} role="grid" aria-label="Calendar days">
-            {days.map((d, i) => (
-              <button
-                key={i}
-                type="button"
-                className={`${styles.dayCell} ${
-                  !d.isCurrentMonth ? styles.otherMonth : ''
-                } ${d.day === selectedDay && d.isCurrentMonth ? styles.selectedDay : ''}`}
-                aria-label={
-                  d.isCurrentMonth
-                    ? `${MONTH_NAMES[month]} ${d.day}`
-                    : `${d.day}`
-                }
-                aria-current={
-                  d.day === selectedDay && d.isCurrentMonth ? 'date' : undefined
-                }
-                onClick={() => selectDay(d.day, d.isCurrentMonth)}
-              >
-                {d.day}
-              </button>
+          <div
+            className={styles.daysGrid}
+            ref={gridRef}
+            onKeyDown={handleGridKeyDown}
+          >
+            {Array.from({ length: 6 }, (_, weekIndex) => (
+              <div key={weekIndex} className={styles.weekRow}>
+                {days.slice(weekIndex * 7, weekIndex * 7 + 7).map((d, i) => {
+                  const isSelected = d.day === selectedDay && d.isCurrentMonth;
+                  return (
+                    <button
+                      key={i}
+                      type="button"
+                      tabIndex={isSelected ? 0 : -1}
+                      className={`${styles.dayCell} ${
+                        !d.isCurrentMonth ? styles.otherMonth : ''
+                      } ${isSelected ? styles.selectedDay : ''}`}
+                      aria-label={
+                        d.isCurrentMonth
+                          ? `${MONTH_NAMES[month]} ${d.day}`
+                          : `${d.day}`
+                      }
+                      aria-current={isSelected ? 'date' : undefined}
+                      onClick={() => selectDay(d.day, d.isCurrentMonth)}
+                    >
+                      {d.day}
+                    </button>
+                  );
+                })}
+              </div>
             ))}
           </div>
         </Card>

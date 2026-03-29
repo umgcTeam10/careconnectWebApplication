@@ -8,7 +8,12 @@
   font-family: var(--font-family);
   font-weight: var(--font-weight-semibold);
   line-height: 1;
+  text-decoration: none;
   transition: background-color 0.15s ease, opacity 0.15s ease;
+}
+
+.button:hover {
+  text-decoration: none;
 }
 
 .button:disabled {

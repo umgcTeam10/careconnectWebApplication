@@ -76,25 +76,19 @@ export default function Onboarding() {
           This helps us show you the most relevant information and features for your needs.
         </p>
 
-        <fieldset className={styles.roleGroup}>
-          <legend className="visually-hidden">Select your role</legend>
+        <div className={styles.roleGroup} role="group" aria-label="Select your role">
           {ROLES.map((role) => (
-            <label
+            <button
               key={role.id}
+              type="button"
               className={`${styles.roleCard} ${
                 selectedRole === role.id ? styles.selected : ''
               }`}
+              aria-pressed={selectedRole === role.id}
+              onClick={() => setSelectedRole(role.id)}
             >
-              <input
-                type="radio"
-                name="role"
-                value={role.id}
-                checked={selectedRole === role.id}
-                onChange={() => setSelectedRole(role.id)}
-                className="visually-hidden"
-              />
-              <h2 className={styles.roleTitle}>{role.title}</h2>
-              <p className={styles.roleDesc}>{role.description}</p>
+              <span className={styles.roleTitle}>{role.title}</span>
+              <span className={styles.roleDesc}>{role.description}</span>
               <ul className={styles.roleFeatures}>
                 {role.features.map((f, i) => (
                   <li key={i} className={styles.feature}>
@@ -102,20 +96,19 @@ export default function Onboarding() {
                   </li>
                 ))}
               </ul>
-            </label>
+            </button>
           ))}
-        </fieldset>
+        </div>
 
-        <Link to="/signin" className={styles.continueLink}>
-          <Button
-            variant="primary"
-            fullWidth
-            size="lg"
-            disabled={!selectedRole}
-          >
-            Continue &rarr;
-          </Button>
-        </Link>
+        <Button
+          variant="primary"
+          fullWidth
+          size="lg"
+          disabled={!selectedRole}
+          to="/signin"
+        >
+          Continue &rarr;
+        </Button>
 
         <p className={styles.signInPrompt}>
           Have an account?{' '}

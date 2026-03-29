@@ -242,7 +242,7 @@
 
 .wellnessCheckDetail {
   font-size: var(--font-size-sm);
-  color: var(--color-success);
+  color: #15803d;
 }
 
 .wellnessCheckDate {

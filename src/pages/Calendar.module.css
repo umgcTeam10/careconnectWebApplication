@@ -43,6 +43,11 @@
   background-color: var(--color-bg);
 }
 
+.navBtn:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: 2px;
+}
+
 .monthYear {
   font-size: var(--font-size-base);
   font-weight: var(--font-weight-bold);
@@ -63,6 +68,12 @@
 }
 
 .daysGrid {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-1);
+}
+
+.weekRow {
   display: grid;
   grid-template-columns: repeat(7, 1fr);
   gap: var(--space-1);
@@ -92,6 +103,11 @@
 
 .dayCell:hover {
   background-color: var(--color-bg);
+}
+
+.dayCell:focus-visible {
+  outline: 2px solid var(--color-navy);
+  outline-offset: -2px;
 }
 
 .otherMonth {

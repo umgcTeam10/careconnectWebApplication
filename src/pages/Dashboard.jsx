@@ -55,16 +55,15 @@ export default function Dashboard() {
                 </p>
               </div>
             </div>
-            <Link to="/health-logs" className={styles.wellnessLink}>
-              <Button variant="primary" size="sm">
-                Log Wellness Check
-              </Button>
-            </Link>
+            <Button variant="primary" size="sm" to="/health-logs">
+              Log Wellness Check
+            </Button>
           </Card>
         </section>
 
         <section aria-labelledby="tasks-heading" className={styles.section}>
           <SectionHeader
+            id="tasks-heading"
             title="Today's Tasks"
             actionLabel="View All →"
             onAction={() => {}}
@@ -108,7 +107,7 @@ export default function Dashboard() {
         </section>
       </div>
 
-      <aside className={styles.rightSidebar}>
+      <aside className={styles.rightSidebar} aria-label="Appointments and care team">
         <Card className={styles.appointmentCard}>
           <div className={styles.appointmentHeader}>
             <h3 className={styles.appointmentTitle}>Next Appointment</h3>
@@ -134,11 +133,9 @@ export default function Dashboard() {
           <p className={styles.careTeamText}>
             Need help or have questions? Reach out anytime.
           </p>
-          <Link to="/messages">
-            <Button variant="primary" size="sm">
-              Send Message
-            </Button>
-          </Link>
+          <Button variant="primary" size="sm" to="/messages">
+            Send Message
+          </Button>
         </Card>
 
         <div>

@@ -24,7 +24,9 @@ export default function Sidebar({ isOpen, onClose }) {
       )}
       <aside
         className={`${styles.sidebar} ${isOpen ? styles.open : ''}`}
-        aria-label="Primary navigation"
+        onKeyDown={(e) => {
+          if (e.key === 'Escape' && isOpen) onClose();
+        }}
       >
         <div className={styles.brand}>
           <span className={styles.logo}>CC</span>
@@ -33,7 +35,7 @@ export default function Sidebar({ isOpen, onClose }) {
             <span className={styles.brandSub}>Patient Portal</span>
           </div>
         </div>
-        <nav className={styles.nav}>
+        <nav className={styles.nav} aria-label="Primary navigation">
           <ul className={styles.navList}>
             {sidebarNavItems.map((item) => (
               <li key={item.path}>
@@ -43,6 +45,7 @@ export default function Sidebar({ isOpen, onClose }) {
                     `${styles.navItem} ${isActive ? styles.active : ''}`
                   }
                   onClick={onClose}
+                  data-focus-light
                 >
                   <Icon name={item.icon} size={20} />
                   <span>{item.label}</span>

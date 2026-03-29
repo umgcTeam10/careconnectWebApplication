@@ -3,7 +3,7 @@ import Icon from './Icon';
 import Badge from './Badge';
 import { currentUser } from '../data/mockData';
 
-export default function Header({ title = 'CareConnect', onMenuToggle }) {
+export default function Header({ title = 'CareConnect', onMenuToggle, isOpen = false }) {
   const now = new Date();
   const dateStr = now.toLocaleDateString('en-US', {
     weekday: 'long',
@@ -22,7 +22,8 @@ export default function Header({ title = 'CareConnect', onMenuToggle }) {
       <button
         className={styles.menuButton}
         onClick={onMenuToggle}
-        aria-label="Open navigation menu"
+        aria-label={isOpen ? 'Close navigation menu' : 'Open navigation menu'}
+        aria-expanded={isOpen}
         type="button"
       >
         <Icon name="menu" size={24} />
